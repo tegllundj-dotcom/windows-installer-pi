@@ -33,12 +33,26 @@
 - Maximum number of open positions
 - Allowed symbols whitelist for automated trading
 
-### AI Signal Intelligence
-- Multi-factor confidence scoring combining technical, sentiment, and momentum analysis
-- Signal strength classification (Weak/Moderate/Strong/Very Strong)
-- Detailed reasoning for each trading signal
-- Real-time signal generation with market condition adaptation
-- Historical signal performance tracking
+### Real-Time AI Signal Generation
+- **Comprehensive Market Analysis**: Multi-layered AI analysis combining technical indicators, market sentiment, volume analysis, and real-time price action
+- **Live Data Integration**: Real-time market data streaming with technical indicator calculations (RSI, MACD, Bollinger Bands, Moving Averages)
+- **Market Sentiment Analysis**: AI-powered sentiment scoring using news analysis, options flow, and market behavior patterns
+- **Signal Confidence Scoring**: Advanced confidence metrics (0-100%) based on multiple confirmation factors
+- **Signal Classification**: Strength-based categorization (Weak/Moderate/Strong) with clear reasoning
+- **Target Price Calculation**: AI-generated target prices and stop-loss levels based on technical and fundamental analysis
+
+### Intelligent Trading Signals
+- **Multi-Timeframe Analysis**: Signal generation across different time horizons (1m, 5m, 15m, 1h, 4h, 1d)
+- **Symbol Coverage**: Major stocks (AAPL, MSFT, GOOGL, TSLA, NVDA) and cryptocurrencies (BTC, ETH)
+- **Technical Reasoning**: Detailed explanations for each signal including supporting indicators
+- **Real-Time Updates**: Continuous signal refresh based on changing market conditions
+- **Signal Lifecycle Management**: Track signals from generation to execution or expiration
+
+### Market Intelligence Dashboard
+- **Live Market Overview**: Real-time price feeds with percentage changes and volume data
+- **Market Sentiment Tracking**: Overall market sentiment with technical and news sentiment breakdowns
+- **Volatility Monitoring**: Real-time volatility assessment and trend strength analysis
+- **Key Level Identification**: Dynamic support and resistance level detection
 1. **Real-Time Market Data Integration**
    - Live price feeds and market data streaming
    - WebSocket connections for instant updates

@@ -19,6 +19,7 @@ import { NeuralNetworkPanel } from "@/components/NeuralNetworkPanel"
 import { NeuralNetworkAnalysis } from "@/components/NeuralNetworkAnalysis"
 import { PatternVisualization } from "@/components/PatternVisualization"
 import { ModelTrainingPanel } from "@/components/ModelTrainingPanel"
+import { AISignalCenter } from "@/components/AISignalCenter"
 import { AutoTradingConfigPanel } from "@/components/AutoTradingConfigPanel"
 import { useState, useEffect, useRef } from "react"
 import { MarketPrediction, DetectedPattern } from "@/lib/neuralNetwork"
@@ -225,6 +226,7 @@ export function TradingDashboard({
             <TabsTrigger value="positions">Positions</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="trades">Recent Trades</TabsTrigger>
+            <TabsTrigger value="ai-signals">AI Signals</TabsTrigger>
             <TabsTrigger value="auto-trading">
               <Robot className="w-4 h-4 mr-1" />
               Auto Trading
@@ -335,6 +337,29 @@ export function TradingDashboard({
                 </Table>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="ai-signals" className="space-y-4">
+            <AISignalCenter 
+              onSignalAction={(signal, action) => {
+                if (action === 'execute') {
+                  // Convert AI signal to order
+                  const newOrder: Order = {
+                    id: `order_${Date.now()}`,
+                    symbol: signal.symbol,
+                    type: signal.type as 'BUY' | 'SELL',
+                    orderType: 'LIMIT',
+                    quantity: Math.floor(10000 / signal.price), // $10k position size
+                    price: signal.price,
+                    status: 'PENDING',
+                    timestamp: new Date().toISOString(),
+                    filledQuantity: 0,
+                    condition: 'DAY'
+                  }
+                  onUpdateOrders([...orders, newOrder])
+                }
+              }}
+            />
           </TabsContent>
 
           <TabsContent value="auto-trading" className="space-y-4">
