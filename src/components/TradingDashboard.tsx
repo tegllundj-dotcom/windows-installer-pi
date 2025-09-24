@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock } from "@phosphor-icons/react"
+import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock, Target } from "@phosphor-icons/react"
 import { Portfolio, Trade, Position, Order } from "@/lib/mockData"
 import { formatCurrency, formatPercent } from "@/lib/utils"
 import { TradeDialog } from "@/components/TradeDialog"
@@ -12,6 +12,7 @@ import { OrdersManagement } from "@/components/OrdersManagement"
 import { RiskManagement } from "@/components/RiskManagement"
 import { QuickActions } from "@/components/QuickActions"
 import { PortfolioChart } from "@/components/PortfolioChart"
+import { StrategyManager } from "@/components/StrategyManager"
 
 interface TradingDashboardProps {
   portfolio: Portfolio
@@ -139,6 +140,7 @@ export function TradingDashboard({
             <TabsTrigger value="positions">Positions</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="trades">Recent Trades</TabsTrigger>
+            <TabsTrigger value="strategies">Strategies</TabsTrigger>
             <TabsTrigger value="risk">Risk Management</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
@@ -241,6 +243,10 @@ export function TradingDashboard({
                 </Table>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="strategies" className="space-y-4">
+            <StrategyManager />
           </TabsContent>
 
           <TabsContent value="risk" className="space-y-4">

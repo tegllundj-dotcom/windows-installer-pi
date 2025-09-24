@@ -1,159 +1,161 @@
-# Auto-Trading Dashboard with Advanced Order Management - PRD
+# Auto-Trading Dashboard with Strategy Management and Backtesting - PRD
 
 ## Core Purpose & Success
 
-**Mission Statement**: A comprehensive auto-trading dashboard that empowers users to manage their portfolios with advanced order types, risk management tools, and real-time market data while providing professional-grade trading capabilities in an intuitive interface.
+**Mission Statement**: A comprehensive auto-trading dashboard that empowers users to create, test, and deploy automated trading strategies while managing their portfolios with advanced order types, risk management tools, and professional-grade backtesting capabilities.
 
 **Success Indicators**: 
-- Users can successfully place and manage complex orders (stop-loss, limit, stop-limit)
+- Users can successfully create and configure automated trading strategies
+- Backtesting provides accurate historical performance analysis
+- Strategy performance is clearly visualized with comprehensive metrics
+- Advanced orders (stop-loss, limit, stop-limit) execute reliably
 - Portfolio risk metrics are clearly visualized and actionable
-- Order management reduces manual oversight requirements
 - Trading interface feels professional yet accessible
 
-**Experience Qualities**: Professional, Secure, Intelligent
+**Experience Qualities**: Intelligent, Professional, Analytical
 
 ## Project Classification & Approach
 
-**Complexity Level**: Complex Application (advanced functionality, comprehensive state management)
+**Complexity Level**: Complex Application (advanced functionality, strategy automation, comprehensive state management)
 
-**Primary User Activity**: Acting and Interacting (active trading, order management, risk monitoring)
+**Primary User Activity**: Creating, Acting, and Analyzing (strategy development, automated trading, performance analysis)
 
 ## Core Problem Analysis
 
-Professional traders and active investors need sophisticated order management tools that are typically only available in complex trading platforms. This dashboard bridges that gap by providing:
+Professional algorithmic traders and quantitative investors need sophisticated strategy development and testing tools that are typically only available in expensive trading platforms. This dashboard democratizes algorithmic trading by providing:
 
-- Advanced order types for risk management
-- Real-time order status tracking
-- Portfolio-level risk analysis
-- Intuitive interfaces for complex trading concepts
+- Visual strategy configuration with pre-built templates
+- Comprehensive backtesting engine with realistic market simulation
+- Automated strategy execution with risk management
+- Professional-grade performance analytics and reporting
+- Advanced order management and portfolio risk analysis
 
 ## Essential Features
 
-### Advanced Order Management
-- **Market Orders**: Immediate execution at current market price
-- **Limit Orders**: Execute only at specified price or better
-- **Stop-Loss Orders**: Automatic sell orders triggered when price drops to protect against losses
-- **Stop-Limit Orders**: Convert to limit orders when stop price is reached for more precise control
+### Automated Trading Strategy System
+- **Pre-built Strategies**: Moving Average Crossover, RSI Mean Reversion, Bollinger Bands
+- **Strategy Configuration**: Visual parameter tuning with sliders and real-time validation
+- **Risk Management Integration**: Per-strategy stop-loss, take-profit, position sizing, and drawdown limits
+- **Strategy Activation**: Toggle strategies on/off with real-time status monitoring
 
-### Risk Management System
-- **Portfolio Risk Analysis**: Real-time assessment of position concentration and exposure
-- **Stop-Loss Coverage**: Track which positions have downside protection
-- **Diversification Metrics**: Monitor portfolio balance and concentration risks
-- **Automated Alerts**: Notify users of high-risk situations
+### Comprehensive Backtesting Engine
+- **Historical Simulation**: Test strategies against generated market data with configurable date ranges
+- **Realistic Trading Costs**: Include commission and slippage for accurate performance assessment
+- **Performance Metrics**: Total return, Sharpe ratio, win rate, maximum drawdown, profit factor
+- **Trade-by-Trade Analysis**: Detailed execution log with entry/exit points and reasons
+- **Visual Analytics**: Equity curve charts with drawdown visualization
 
-### Order Status Tracking
-- **Pending Orders**: View and manage all active orders with real-time status
-- **Order History**: Complete audit trail of all trading activity
-- **Quick Cancellation**: One-click order cancellation with confirmation
-- **Execution Details**: Track fill prices, quantities, and timing
+### Advanced Strategy Analytics
+- **Performance Comparison**: Side-by-side strategy performance analysis
+- **Risk Metrics**: Comprehensive risk assessment including volatility and correlation analysis
+- **Strategy Optimization**: Parameter sensitivity analysis and optimization suggestions
+- **Live Strategy Monitoring**: Real-time performance tracking for active strategies
 
-### Enhanced Trading Interface
-- **Quick Trade with Stop-Loss**: Simple trades with optional automatic stop-loss protection
-- **Advanced Trade Dialog**: Comprehensive order placement with all order types
-- **Visual Order Management**: Intuitive table views with filtering and sorting
-- **Risk-Aware Recommendations**: Smart suggestions based on portfolio analysis
+### Enhanced Order Management (Existing)
+- **Advanced Order Types**: Market, Limit, Stop-Loss, Stop-Limit orders with conditional logic
+- **Strategy Integration**: Automated order generation from strategy signals
+- **Risk-Based Position Sizing**: Automatic position sizing based on strategy risk parameters
+- **Portfolio-Level Risk Controls**: Global risk limits across all strategies
 
 ## Design Direction
 
 ### Visual Tone & Identity
-**Emotional Response**: Users should feel confident, informed, and in control of their investments
-**Design Personality**: Professional financial interface with modern sensibilities - serious but approachable
-**Visual Metaphors**: Trading floor professionalism meets modern fintech clarity
+**Emotional Response**: Users should feel like professional quantitative traders with access to institutional-grade tools
+**Design Personality**: Sophisticated financial analytics interface - data-driven, precise, and powerful
+**Visual Metaphors**: Quantitative research lab meets professional trading floor
 
-### Color Strategy
-**Color Scheme Type**: Sophisticated monochromatic with strategic accent colors
-- **Primary Color**: Deep blue (oklch(0.25 0.1 240)) - conveying trust and stability
-- **Secondary Colors**: Neutral grays for interface structure
-- **Accent Color**: Warm amber (oklch(0.65 0.15 40)) - for highlighting important actions
-- **Success/Profit**: Green tones for positive P&L and successful actions
-- **Warning/Loss**: Red tones for losses and dangerous actions
-- **Alert**: Orange for risk warnings and attention-grabbing notifications
+### Strategy Management Interface Design
 
-### Typography System
-**Font Pairing**: Inter for interface text, JetBrains Mono for numerical data
-- **Interface Typography**: Clean, highly legible sans-serif for all UI elements
-- **Data Typography**: Monospace font for financial figures, ensuring proper alignment
-- **Hierarchy**: Clear distinction between headers, body text, and data displays
+#### Strategy Cards
+- **Status Indicators**: Clear visual distinction between active/inactive strategies
+- **Performance Summary**: Key metrics prominently displayed with trend indicators  
+- **Quick Actions**: Easy activation/deactivation and configuration access
+- **Risk Assessment**: Visual risk rating with color-coded indicators
 
-### Advanced Trading UI Elements
+#### Backtesting Interface
+- **Configuration Panels**: Intuitive parameter selection with smart defaults
+- **Progress Indicators**: Real-time backtesting progress with estimated completion time
+- **Results Visualization**: Professional charts and tables for performance analysis
+- **Comparison Tools**: Side-by-side strategy comparison capabilities
 
-#### Order Type Selection
-- **Visual Cards**: Each order type presented as a selectable card with icon and description
-- **Progressive Disclosure**: Complex order parameters revealed only when selected
-- **Smart Defaults**: Pre-filled values based on market conditions and risk settings
+#### Performance Analytics
+- **Interactive Charts**: Zoomable equity curves with overlays for drawdowns and key events
+- **Metric Dashboards**: Comprehensive performance statistics in organized card layouts
+- **Trade Analysis Tables**: Sortable and filterable trade histories with detailed breakdowns
 
-#### Risk Visualization
-- **Risk Score**: Clear numerical score with color-coded progress bar
-- **Alert System**: Graduated alert levels with appropriate visual treatment
-- **Position Risk**: Individual position risk assessment with badges and indicators
+### Color Strategy Enhancement
+- **Strategy Status**: Green for profitable strategies, red for losing strategies, gray for inactive
+- **Performance Visualization**: Gradient scales for performance metrics (green = good, red = poor)
+- **Risk Indicators**: Heat map colors for risk levels (cool = safe, warm = risky)
 
-#### Order Management Interface
-- **Status Indicators**: Clear visual status for pending, filled, cancelled orders
-- **Tabbed Organization**: Separate views for different order statuses
-- **Quick Actions**: One-click cancellation and modification options
-- **Detail Overlays**: Comprehensive order information in modal dialogs
+## Technical Implementation
 
-### Motion and Interaction
-- **Smooth Transitions**: 300ms transitions between order states and tab changes
-- **Loading States**: Professional loading indicators during order placement
-- **Success Feedback**: Satisfying confirmation animations for completed actions
-- **Error Handling**: Clear, actionable error messages with recovery suggestions
+### Strategy Engine Architecture
+- **Strategy Base Class**: Abstract class for implementing custom trading logic
+- **Technical Indicators Library**: SMA, EMA, RSI, MACD, Bollinger Bands implementations
+- **Signal Generation**: Standardized signal interface with strength and reasoning
+- **Risk Management Framework**: Integrated risk controls at strategy and portfolio levels
 
-## Implementation Considerations
+### Backtesting System
+- **Market Data Generator**: Realistic price data generation with volume and volatility
+- **Simulation Engine**: Accurate trade execution simulation with slippage and commissions
+- **Performance Calculator**: Comprehensive metrics calculation including advanced ratios
+- **Results Storage**: Persistent backtest results with comparison capabilities
 
-### Data Management
-- **Persistent Storage**: Orders and risk settings maintained across sessions
-- **Real-time Updates**: Order status changes reflected immediately
-- **State Synchronization**: Portfolio updates trigger risk recalculations
+### Data Management Strategy
+- **Strategy Persistence**: Strategy configurations saved across sessions
+- **Backtest Results Cache**: Historical test results stored for quick retrieval
+- **Performance Monitoring**: Real-time strategy performance tracking
+- **Configuration Validation**: Robust parameter validation with helpful error messages
 
-### Performance Optimization
-- **Efficient Filtering**: Fast order list filtering and sorting
-- **Lazy Loading**: Complex risk calculations only when viewing risk tab
-- **Optimistic Updates**: UI updates immediately with server confirmation
+## User Experience Flows
 
-### User Experience Flow
-1. **Quick Trading**: Simple market orders with optional stop-loss protection
-2. **Advanced Orders**: Complex order types through comprehensive dialog
-3. **Order Monitoring**: Real-time tracking of all active orders
-4. **Risk Assessment**: Continuous portfolio risk analysis
-5. **Alert Management**: Proactive risk notifications and recommendations
+### Strategy Development Flow
+1. **Strategy Selection**: Choose from pre-built strategy templates or create custom
+2. **Parameter Configuration**: Visual parameter tuning with real-time validation
+3. **Risk Management Setup**: Configure stop-loss, take-profit, and position sizing
+4. **Backtesting**: Test strategy against historical data with comprehensive results
+5. **Optimization**: Refine parameters based on backtest performance
+6. **Deployment**: Activate strategy for live trading with monitoring
 
-## Technical Architecture
+### Backtesting and Analysis Flow
+1. **Test Configuration**: Set date range, initial capital, and trading costs
+2. **Strategy Selection**: Choose strategies to test individually or in combination
+3. **Execution**: Run backtest with real-time progress monitoring
+4. **Results Review**: Analyze comprehensive performance metrics and trade details
+5. **Comparison**: Compare multiple strategies side-by-side
+6. **Optimization**: Identify parameter improvements and retest
 
-### Component Structure
-- **AdvancedTradeDialog**: Comprehensive order placement interface
-- **OrdersManagement**: Real-time order tracking and management
-- **RiskManagement**: Portfolio risk analysis and recommendations
-- **Enhanced TradeDialog**: Simple trades with stop-loss options
+## Advanced Features
 
-### State Management
-- **Orders**: Array of order objects with real-time status tracking
-- **Risk Metrics**: Calculated portfolio risk indicators
-- **Trade History**: Complete audit trail of all transactions
-- **Portfolio Data**: Real-time position and performance data
+### Strategy Management
+- **Template Library**: Professionally designed strategy templates
+- **Custom Strategy Builder**: Visual interface for creating proprietary strategies
+- **Strategy Sharing**: Export/import strategy configurations
+- **Performance Tracking**: Historical performance analysis for deployed strategies
+
+### Risk Management Integration
+- **Portfolio-Level Limits**: Global exposure and concentration limits
+- **Strategy Correlation**: Avoid over-concentration in correlated strategies
+- **Dynamic Position Sizing**: Adjust position sizes based on strategy performance
+- **Emergency Controls**: Circuit breakers for extreme market conditions
 
 ## Success Metrics
 
-### Functional Success
-- All order types execute correctly with appropriate validation
-- Risk calculations update in real-time as portfolio changes
-- Order management interface provides complete visibility and control
-- Trading workflows are intuitive for both novice and experienced users
+### Strategy Development Success
+- Users can configure and deploy strategies without technical knowledge
+- Backtesting results accurately reflect real-world trading performance
+- Strategy performance visualization helps users make informed decisions
+- Risk management controls effectively protect against excessive losses
 
-### User Experience Success
-- Users can place complex orders without confusion
-- Risk alerts are actionable and help prevent losses
-- Order management reduces anxiety about active trades
-- Interface feels professional and trustworthy
-
-### Technical Success
-- Order state management is reliable and consistent
-- Risk calculations are accurate and performant
-- All trading actions provide immediate feedback
-- Error handling gracefully manages edge cases
+### User Engagement Success
+- Users actively create and test multiple strategies
+- Backtesting feature is regularly used before strategy deployment
+- Strategy performance analysis drives iterative improvement
+- Professional-grade interface builds user confidence in automated trading
 
 ## Future Enhancements
-- **Real-time Market Data**: Live price feeds for more accurate order placement
-- **Advanced Analytics**: Performance attribution and trading pattern analysis
-- **Automated Risk Management**: Programmable risk rules and automatic position sizing
-- **Mobile Interface**: Responsive design optimized for mobile trading
+- **Machine Learning Integration**: AI-powered strategy optimization and market regime detection
+- **Advanced Market Data**: Real-time and historical market data integration
+- **Portfolio Optimization**: Modern portfolio theory integration for strategy allocation
+- **Community Features**: Strategy sharing and collaborative development platform
