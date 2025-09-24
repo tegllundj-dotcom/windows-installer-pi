@@ -3,31 +3,50 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar } from "@phosphor-icons/react"
-import { Portfolio, Trade, Position } from "@/lib/mockData"
+import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock } from "@phosphor-icons/react"
+import { Portfolio, Trade, Position, Order } from "@/lib/mockData"
 import { formatCurrency, formatPercent } from "@/lib/utils"
 import { TradeDialog } from "@/components/TradeDialog"
+import { AdvancedTradeDialog } from "@/components/AdvancedTradeDialog"
+import { OrdersManagement } from "@/components/OrdersManagement"
+import { RiskManagement } from "@/components/RiskManagement"
+import { QuickActions } from "@/components/QuickActions"
 import { PortfolioChart } from "@/components/PortfolioChart"
 
 interface TradingDashboardProps {
   portfolio: Portfolio
   trades: Trade[]
   positions: Position[]
+  orders: Order[]
   onUpdatePortfolio: (portfolio: Portfolio) => void
   onUpdateTrades: (trades: Trade[]) => void
   onUpdatePositions: (positions: Position[]) => void
+  onUpdateOrders: (orders: Order[]) => void
 }
 
 export function TradingDashboard({
   portfolio,
   trades,
   positions,
+  orders,
   onUpdatePortfolio,
   onUpdateTrades,
-  onUpdatePositions
+  onUpdatePositions,
+  onUpdateOrders
 }: TradingDashboardProps) {
 
   const totalPositionValue = positions.reduce((sum, pos) => sum + pos.marketValue, 0)
+  const pendingOrders = orders.filter(o => o.status === 'PENDING')
+
+  const handleOrderPlace = (newOrder: Order) => {
+    onUpdateOrders([...orders, newOrder])
+  }
+
+  const handleOrderCancel = (orderId: string) => {
+    onUpdateOrders(orders.map(order => 
+      order.id === orderId ? { ...order, status: 'CANCELLED' as const } : order
+    ))
+  }
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -45,6 +64,11 @@ export function TradingDashboard({
               onTradeComplete={(newTrade) => {
                 onUpdateTrades([...trades, newTrade])
               }}
+              onOrderPlace={handleOrderPlace}
+            />
+            <AdvancedTradeDialog
+              positions={positions}
+              onOrderPlace={handleOrderPlace}
             />
           </div>
         </div>
@@ -97,13 +121,13 @@ export function TradingDashboard({
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Positions</CardTitle>
-              <ChartBar className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Pending Orders</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{positions.length}</div>
+              <div className="text-2xl font-bold">{pendingOrders.length}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                {formatCurrency(totalPositionValue)} total value
+                Active orders
               </p>
             </CardContent>
           </Card>
@@ -113,11 +137,17 @@ export function TradingDashboard({
         <Tabs defaultValue="positions" className="space-y-4">
           <TabsList>
             <TabsTrigger value="positions">Positions</TabsTrigger>
+            <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="trades">Recent Trades</TabsTrigger>
+            <TabsTrigger value="risk">Risk Management</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="positions" className="space-y-4">
+            <QuickActions 
+              positions={positions}
+              onOrderPlace={handleOrderPlace}
+            />
             <Card>
               <CardHeader>
                 <CardTitle>Current Positions</CardTitle>
@@ -155,6 +185,13 @@ export function TradingDashboard({
                 </Table>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="orders" className="space-y-4">
+            <OrdersManagement 
+              orders={orders}
+              onCancelOrder={handleOrderCancel}
+            />
           </TabsContent>
 
           <TabsContent value="trades" className="space-y-4">
@@ -204,6 +241,14 @@ export function TradingDashboard({
                 </Table>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="risk" className="space-y-4">
+            <RiskManagement 
+              portfolio={portfolio}
+              positions={positions}
+              orders={orders}
+            />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-4">

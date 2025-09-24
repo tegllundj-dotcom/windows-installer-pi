@@ -5,22 +5,27 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Plus } from "@phosphor-icons/react"
-import { Trade, Position } from "@/lib/mockData"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Separator } from "@/components/ui/separator"
+import { Plus, Shield } from "@phosphor-icons/react"
+import { Trade, Position, Order } from "@/lib/mockData"
 import { formatCurrency } from "@/lib/utils"
 import { toast } from "sonner"
 
 interface TradeDialogProps {
   positions: Position[]
   onTradeComplete: (trade: Trade) => void
+  onOrderPlace?: (order: Order) => void
 }
 
-export function TradeDialog({ positions, onTradeComplete }: TradeDialogProps) {
+export function TradeDialog({ positions, onTradeComplete, onOrderPlace }: TradeDialogProps) {
   const [open, setOpen] = useState(false)
   const [tradeType, setTradeType] = useState<'BUY' | 'SELL'>('BUY')
   const [symbol, setSymbol] = useState('')
   const [quantity, setQuantity] = useState('')
   const [price, setPrice] = useState('')
+  const [addStopLoss, setAddStopLoss] = useState(false)
+  const [stopLossPercent, setStopLossPercent] = useState('10')
   const [loading, setLoading] = useState(false)
 
   const availableSymbols = positions.map(p => p.symbol)
@@ -58,12 +63,33 @@ export function TradeDialog({ positions, onTradeComplete }: TradeDialogProps) {
 
     onTradeComplete(newTrade)
     
+    // Create stop-loss order if requested and it's a BUY trade
+    if (addStopLoss && tradeType === 'BUY' && onOrderPlace) {
+      const stopPrice = numPrice * (1 - parseFloat(stopLossPercent) / 100)
+      const stopLossOrder: Order = {
+        id: `stop-${Date.now()}`,
+        symbol,
+        type: 'SELL',
+        orderType: 'STOP_LOSS',
+        quantity: numQuantity,
+        stopPrice,
+        timestamp: new Date().toISOString(),
+        status: 'PENDING',
+        filledQuantity: 0,
+        condition: 'GTC'
+      }
+      onOrderPlace(stopLossOrder)
+      toast.success(`Stop-loss order also placed at ${formatCurrency(stopPrice)}`)
+    }
+    
     toast.success(`${tradeType} order for ${numQuantity} shares of ${symbol} completed`)
     
     // Reset form
     setSymbol('')
     setQuantity('')
     setPrice('')
+    setAddStopLoss(false)
+    setStopLossPercent('10')
     setLoading(false)
     setOpen(false)
   }
@@ -165,6 +191,48 @@ export function TradeDialog({ positions, onTradeComplete }: TradeDialogProps) {
                 <span className="font-mono font-medium">{formatCurrency(estimatedTotal)}</span>
               </div>
             </div>
+          )}
+
+          {/* Stop-Loss Option for BUY orders */}
+          {tradeType === 'BUY' && onOrderPlace && (
+            <>
+              <Separator />
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="add-stop-loss" 
+                    checked={addStopLoss}
+                    onCheckedChange={(checked) => setAddStopLoss(!!checked)}
+                  />
+                  <Label htmlFor="add-stop-loss" className="flex items-center">
+                    <Shield className="h-4 w-4 mr-2" />
+                    Add Stop-Loss Protection
+                  </Label>
+                </div>
+                
+                {addStopLoss && (
+                  <div className="space-y-2 pl-6">
+                    <Label htmlFor="stop-loss-percent">Stop-Loss Percentage</Label>
+                    <Select value={stopLossPercent} onValueChange={setStopLossPercent}>
+                      <SelectTrigger id="stop-loss-percent">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="5">5% below purchase price</SelectItem>
+                        <SelectItem value="10">10% below purchase price</SelectItem>
+                        <SelectItem value="15">15% below purchase price</SelectItem>
+                        <SelectItem value="20">20% below purchase price</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {price && (
+                      <p className="text-xs text-muted-foreground">
+                        Stop-loss will trigger at: {formatCurrency(parseFloat(price) * (1 - parseFloat(stopLossPercent) / 100))}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
           )}
 
           <div className="flex justify-end space-x-2">
