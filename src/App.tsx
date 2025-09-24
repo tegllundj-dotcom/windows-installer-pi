@@ -3,6 +3,7 @@ import { useKV } from '@github/spark/hooks'
 import { useEffect } from 'react'
 import { TradingDashboard } from '@/components/TradingDashboard'
 import { generateMockData, generateMockOrders, type Portfolio, type Trade, type Position, type Order } from '@/lib/mockData'
+import { initializeRealTimeDemo } from '@/lib/demoInit'
 
 function App() {
   const [portfolioData, setPortfolioData] = useKV<Portfolio | null>("portfolio-data", null)
@@ -18,6 +19,11 @@ function App() {
       setTrades(mockData.trades)
       setPositions(mockData.positions)
       setOrders(mockOrders)
+      
+      // Initialize real-time demo after mock data is set
+      setTimeout(() => {
+        initializeRealTimeDemo()
+      }, 1000)
     }
   }, [portfolioData, setPortfolioData, setTrades, setPositions, setOrders])
 

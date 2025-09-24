@@ -16,6 +16,7 @@ import { StrategyManager } from "@/components/StrategyManager"
 import { MLPredictions } from "@/components/MLPredictions"
 import { MLPerformance } from "@/components/MLPerformance"
 import { NeuralNetworkPanel } from "@/components/NeuralNetworkPanel"
+import { NeuralNetworkAnalysis } from "@/components/NeuralNetworkAnalysis"
 import { PatternVisualization } from "@/components/PatternVisualization"
 import { ModelTrainingPanel } from "@/components/ModelTrainingPanel"
 import { useState } from "react"
@@ -262,11 +263,16 @@ export function TradingDashboard({
           </TabsContent>
 
           <TabsContent value="neural-networks" className="space-y-4">
-            <Tabs defaultValue="analysis" className="space-y-4">
-              <TabsList className="grid w-full grid-cols-2">
+            <Tabs defaultValue="real-time" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="real-time">Real-time Analysis</TabsTrigger>
                 <TabsTrigger value="analysis">Market Analysis</TabsTrigger>
                 <TabsTrigger value="training">Model Training</TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="real-time">
+                <NeuralNetworkAnalysis symbol="BTCUSD" />
+              </TabsContent>
               
               <TabsContent value="analysis">
                 <NeuralNetworkPanel 
