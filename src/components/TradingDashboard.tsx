@@ -15,6 +15,11 @@ import { PortfolioChart } from "@/components/PortfolioChart"
 import { StrategyManager } from "@/components/StrategyManager"
 import { MLPredictions } from "@/components/MLPredictions"
 import { MLPerformance } from "@/components/MLPerformance"
+import { NeuralNetworkPanel } from "@/components/NeuralNetworkPanel"
+import { PatternVisualization } from "@/components/PatternVisualization"
+import { ModelTrainingPanel } from "@/components/ModelTrainingPanel"
+import { useState } from "react"
+import { MarketPrediction, DetectedPattern } from "@/lib/neuralNetwork"
 
 interface TradingDashboardProps {
   portfolio: Portfolio
@@ -37,6 +42,8 @@ export function TradingDashboard({
   onUpdatePositions,
   onUpdateOrders
 }: TradingDashboardProps) {
+  const [predictions, setPredictions] = useState<MarketPrediction[]>([])
+  const [patterns, setPatterns] = useState<DetectedPattern[]>([])
 
   const totalPositionValue = positions.reduce((sum, pos) => sum + pos.marketValue, 0)
   const pendingOrders = orders.filter(o => o.status === 'PENDING')
@@ -143,6 +150,7 @@ export function TradingDashboard({
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="trades">Recent Trades</TabsTrigger>
             <TabsTrigger value="strategies">Strategies</TabsTrigger>
+            <TabsTrigger value="neural-networks">Neural Networks</TabsTrigger>
             <TabsTrigger value="risk">Risk Management</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="ml-predictions">AI Predictions</TabsTrigger>
@@ -253,6 +261,30 @@ export function TradingDashboard({
             <StrategyManager />
           </TabsContent>
 
+          <TabsContent value="neural-networks" className="space-y-4">
+            <Tabs defaultValue="analysis" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="analysis">Market Analysis</TabsTrigger>
+                <TabsTrigger value="training">Model Training</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="analysis">
+                <NeuralNetworkPanel 
+                  isActive={true}
+                  onPredictionsUpdate={setPredictions}
+                  onPatternsUpdate={setPatterns}
+                />
+              </TabsContent>
+              
+              <TabsContent value="training">
+                <ModelTrainingPanel 
+                  models={[]}
+                  onModelUpdate={() => {}}
+                />
+              </TabsContent>
+            </Tabs>
+          </TabsContent>
+
           <TabsContent value="risk" className="space-y-4">
             <RiskManagement 
               portfolio={portfolio}
@@ -303,6 +335,12 @@ export function TradingDashboard({
               trades={trades}
               positions={positions}
             />
+            {(predictions.length > 0 || patterns.length > 0) && (
+              <PatternVisualization 
+                patterns={patterns}
+                predictions={predictions}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="ml-engine" className="space-y-4">

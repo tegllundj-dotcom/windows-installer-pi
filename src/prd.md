@@ -1,185 +1,78 @@
-# Auto-Trading Dashboard with ML Strategy Optimization and Market Prediction - PRD
+# Neural Network Pattern Recognition for Auto-Trading
 
 ## Core Purpose & Success
-
-**Mission Statement**: An advanced auto-trading dashboard that combines machine learning-powered market predictions with sophisticated strategy optimization, enabling users to create, test, and deploy AI-enhanced trading strategies with professional-grade risk management and performance analytics.
-
-**Success Indicators**: 
-- Users can successfully create and configure automated trading strategies
-- ML predictions provide accurate market direction and price targets
-- Strategy optimization improves performance metrics through AI-driven parameter tuning
-- Market regime detection adapts strategies to current market conditions
-- Advanced orders (stop-loss, limit, stop-limit) execute reliably
-- AI risk analysis provides actionable insights and early warning systems
-- Trading interface feels professional yet accessible with intelligent automation
-
-**Experience Qualities**: Intelligent, Predictive, Analytical
+- **Mission Statement**: Create an advanced auto-trading platform with neural network models for sophisticated pattern recognition and market prediction.
+- **Success Indicators**: Accurate pattern detection, profitable trading signals, and intuitive ML model visualization for traders.
+- **Experience Qualities**: Professional, intelligent, predictive
 
 ## Project Classification & Approach
+- **Complexity Level**: Complex Application (advanced ML functionality, real-time analysis)
+- **Primary User Activity**: Analyzing market patterns and executing automated trades based on neural network predictions
 
-**Complexity Level**: Complex Application (AI/ML integration, advanced strategy automation, comprehensive state management)
-
-**Primary User Activity**: Creating, Predicting, and Optimizing (AI-powered strategy development, market prediction, automated optimization)
-
-## Core Problem Analysis
-
-Professional algorithmic traders need sophisticated ML-powered tools to gain competitive advantages in dynamic markets. Traditional trading platforms lack intelligent prediction and optimization capabilities. This dashboard provides:
-
-- AI-driven market prediction and trend analysis
-- Machine learning strategy optimization with genetic algorithms
-- Automated market regime detection and strategy adaptation  
-- Intelligent risk factor identification and monitoring
-- Professional-grade performance analytics with predictive insights
+## Thought Process for Feature Selection
+- **Core Problem Analysis**: Traders need sophisticated pattern recognition to identify profitable opportunities in noisy market data
+- **User Context**: Active traders and quantitative analysts who want to leverage machine learning for trading decisions
+- **Critical Path**: Data input → Neural network analysis → Pattern recognition → Trading signals → Strategy execution
+- **Key Moments**: Model training completion, pattern detection alerts, trade execution confirmations
 
 ## Essential Features
-
-### Machine Learning Prediction Engine
-- **Price Predictions**: AI-powered price targets with confidence intervals across multiple timeframes
-- **Market Regime Detection**: Automatic identification of trending, ranging, volatile, or stable market conditions
-- **Pattern Recognition**: Advanced technical pattern detection using ML algorithms
-- **Sentiment Analysis Integration**: Market sentiment scoring and trend prediction
-- **Multi-timeframe Analysis**: Predictions spanning 1-hour to 1-week horizons
-
-### Strategy Optimization System  
-- **AI Parameter Tuning**: Genetic algorithm optimization of strategy parameters
-- **Performance Enhancement**: Automatic improvement of win rates, Sharpe ratios, and returns
-- **Risk-Adjusted Optimization**: Balance return maximization with risk minimization
-- **Real-time Strategy Adaptation**: Dynamic parameter adjustment based on market conditions
-- **Backtesting Integration**: Optimization validation through historical testing
-
-### Automated Trading Strategy System
-### Automated Trading Strategy System
-- **ML-Enhanced Strategies**: Moving Average Crossover, RSI Mean Reversion, Pattern Recognition powered by machine learning
-- **AI Signal Generation**: Real-time trading signals with confidence scores and expected returns
-- **Dynamic Strategy Configuration**: AI-optimized parameter tuning with real-time performance feedback
-- **Intelligent Risk Management**: ML-powered position sizing, stop-loss optimization, and drawdown protection
-- **Adaptive Strategy Selection**: Automatic strategy activation based on market regime detection
-
-### AI Risk Management System
-- **Predictive Risk Analysis**: Early detection of portfolio concentration, volatility, and correlation risks  
-- **Market Stress Testing**: AI simulation of adverse market scenarios and portfolio impact
-- **Dynamic Position Sizing**: ML-optimized position sizes based on predicted volatility and correlations
-- **Real-time Risk Monitoring**: Continuous assessment of portfolio risk with intelligent alerting
-- **Risk Factor Identification**: Automatic detection and explanation of emerging risk factors
-
-### Comprehensive Backtesting Engine
-- **Historical Simulation**: Test strategies against generated market data with configurable date ranges
-- **Realistic Trading Costs**: Include commission and slippage for accurate performance assessment
-- **Performance Metrics**: Total return, Sharpe ratio, win rate, maximum drawdown, profit factor
-- **Trade-by-Trade Analysis**: Detailed execution log with entry/exit points and reasons
-- **Visual Analytics**: Equity curve charts with drawdown visualization
-
-### Advanced Strategy Analytics
-- **Performance Comparison**: Side-by-side strategy performance analysis
-- **Risk Metrics**: Comprehensive risk assessment including volatility and correlation analysis
-- **Strategy Optimization**: Parameter sensitivity analysis and optimization suggestions
-- **Live Strategy Monitoring**: Real-time performance tracking for active strategies
-
-### Enhanced Order Management (Existing)
-- **Advanced Order Types**: Market, Limit, Stop-Loss, Stop-Limit orders with conditional logic
-- **Strategy Integration**: Automated order generation from strategy signals
-- **Risk-Based Position Sizing**: Automatic position sizing based on strategy risk parameters
-- **Portfolio-Level Risk Controls**: Global risk limits across all strategies
+1. **Multiple Neural Network Models**
+   - LSTM for time series prediction
+   - CNN for chart pattern recognition
+   - Transformer for attention-based analysis
+   - Hybrid ensemble models
+2. **Real-time Pattern Detection**
+   - Support/resistance levels
+   - Trend reversals
+   - Chart patterns (head & shoulders, triangles, etc.)
+3. **Model Training & Backtesting**
+   - Historical data training
+   - Performance metrics
+   - Strategy validation
+4. **Interactive Visualizations**
+   - Neural network architecture diagrams
+   - Pattern recognition overlays
+   - Prediction confidence intervals
 
 ## Design Direction
 
 ### Visual Tone & Identity
-**Emotional Response**: Users should feel like professional quantitative traders with access to institutional-grade tools
-**Design Personality**: Sophisticated financial analytics interface - data-driven, precise, and powerful
-**Visual Metaphors**: Quantitative research lab meets professional trading floor
+- **Emotional Response**: Confidence, precision, technological sophistication
+- **Design Personality**: Professional, cutting-edge, data-driven
+- **Visual Metaphors**: Neural networks, data flow, pattern recognition
+- **Simplicity Spectrum**: Rich interface with complex data visualization
 
-### Strategy Management Interface Design
+### Color Strategy
+- **Color Scheme Type**: Triadic with tech-focused palette
+- **Primary Color**: Deep blue (#1e40af) - trust and technology
+- **Secondary Colors**: Slate gray (#475569) - professional foundation
+- **Accent Color**: Electric green (#10b981) - success and AI insight
+- **Color Psychology**: Blues convey trust and stability, greens indicate profitable patterns
+- **Foreground/Background Pairings**: 
+  - Background (white): Foreground (dark gray #0f172a)
+  - Primary (blue): Foreground (white)
+  - Success (green): Foreground (white)
+  - Card (light gray): Foreground (dark gray)
 
-#### Strategy Cards
-- **Status Indicators**: Clear visual distinction between active/inactive strategies
-- **Performance Summary**: Key metrics prominently displayed with trend indicators  
-- **Quick Actions**: Easy activation/deactivation and configuration access
-- **Risk Assessment**: Visual risk rating with color-coded indicators
+### Typography System
+- **Font Pairing Strategy**: Inter for UI elements, JetBrains Mono for data/code
+- **Typographic Hierarchy**: Clear distinction between headings, data, and body text
+- **Font Personality**: Modern, technical, highly readable
+- **Which fonts**: Inter (primary), JetBrains Mono (monospace data)
+- **Legibility Check**: Both fonts optimized for screen reading and data display
 
-#### Backtesting Interface
-- **Configuration Panels**: Intuitive parameter selection with smart defaults
-- **Progress Indicators**: Real-time backtesting progress with estimated completion time
-- **Results Visualization**: Professional charts and tables for performance analysis
-- **Comparison Tools**: Side-by-side strategy comparison capabilities
+### Visual Hierarchy & Layout
+- **Attention Direction**: Neural network visualizations draw focus, then trading signals
+- **White Space Philosophy**: Clean separation between complex data visualizations
+- **Grid System**: Dashboard grid with dedicated spaces for charts, models, and controls
+- **Component Hierarchy**: Primary (model predictions), Secondary (historical data), Tertiary (settings)
 
-#### Performance Analytics
-- **Interactive Charts**: Zoomable equity curves with overlays for drawdowns and key events
-- **Metric Dashboards**: Comprehensive performance statistics in organized card layouts
-- **Trade Analysis Tables**: Sortable and filterable trade histories with detailed breakdowns
+### Animations
+- **Purposeful Meaning**: Smooth transitions for data updates, loading animations for model training
+- **Hierarchy of Movement**: Critical alerts get attention, subtle updates for live data
+- **Contextual Appropriateness**: Professional animations that enhance understanding
 
-### Color Strategy Enhancement
-- **Strategy Status**: Green for profitable strategies, red for losing strategies, gray for inactive
-- **Performance Visualization**: Gradient scales for performance metrics (green = good, red = poor)
-- **Risk Indicators**: Heat map colors for risk levels (cool = safe, warm = risky)
-
-## Technical Implementation
-
-### Strategy Engine Architecture
-- **Strategy Base Class**: Abstract class for implementing custom trading logic
-- **Technical Indicators Library**: SMA, EMA, RSI, MACD, Bollinger Bands implementations
-- **Signal Generation**: Standardized signal interface with strength and reasoning
-- **Risk Management Framework**: Integrated risk controls at strategy and portfolio levels
-
-### Backtesting System
-- **Market Data Generator**: Realistic price data generation with volume and volatility
-- **Simulation Engine**: Accurate trade execution simulation with slippage and commissions
-- **Performance Calculator**: Comprehensive metrics calculation including advanced ratios
-- **Results Storage**: Persistent backtest results with comparison capabilities
-
-### Data Management Strategy
-- **Strategy Persistence**: Strategy configurations saved across sessions
-- **Backtest Results Cache**: Historical test results stored for quick retrieval
-- **Performance Monitoring**: Real-time strategy performance tracking
-- **Configuration Validation**: Robust parameter validation with helpful error messages
-
-## User Experience Flows
-
-### Strategy Development Flow
-1. **Strategy Selection**: Choose from pre-built strategy templates or create custom
-2. **Parameter Configuration**: Visual parameter tuning with real-time validation
-3. **Risk Management Setup**: Configure stop-loss, take-profit, and position sizing
-4. **Backtesting**: Test strategy against historical data with comprehensive results
-5. **Optimization**: Refine parameters based on backtest performance
-6. **Deployment**: Activate strategy for live trading with monitoring
-
-### Backtesting and Analysis Flow
-1. **Test Configuration**: Set date range, initial capital, and trading costs
-2. **Strategy Selection**: Choose strategies to test individually or in combination
-3. **Execution**: Run backtest with real-time progress monitoring
-4. **Results Review**: Analyze comprehensive performance metrics and trade details
-5. **Comparison**: Compare multiple strategies side-by-side
-6. **Optimization**: Identify parameter improvements and retest
-
-## Advanced Features
-
-### Strategy Management
-- **Template Library**: Professionally designed strategy templates
-- **Custom Strategy Builder**: Visual interface for creating proprietary strategies
-- **Strategy Sharing**: Export/import strategy configurations
-- **Performance Tracking**: Historical performance analysis for deployed strategies
-
-### Risk Management Integration
-- **Portfolio-Level Limits**: Global exposure and concentration limits
-- **Strategy Correlation**: Avoid over-concentration in correlated strategies
-- **Dynamic Position Sizing**: Adjust position sizes based on strategy performance
-- **Emergency Controls**: Circuit breakers for extreme market conditions
-
-## Success Metrics
-
-### Strategy Development Success
-- Users can configure and deploy strategies without technical knowledge
-- Backtesting results accurately reflect real-world trading performance
-- Strategy performance visualization helps users make informed decisions
-- Risk management controls effectively protect against excessive losses
-
-### User Engagement Success
-- Users actively create and test multiple strategies
-- Backtesting feature is regularly used before strategy deployment
-- Strategy performance analysis drives iterative improvement
-- Professional-grade interface builds user confidence in automated trading
-
-## Future Enhancements
-- **Machine Learning Integration**: AI-powered strategy optimization and market regime detection
-- **Advanced Market Data**: Real-time and historical market data integration
-- **Portfolio Optimization**: Modern portfolio theory integration for strategy allocation
-- **Community Features**: Strategy sharing and collaborative development platform
+## Implementation Considerations
+- **Scalability Needs**: Support for multiple models and large datasets
+- **Testing Focus**: Model accuracy, performance metrics, user interface responsiveness
+- **Critical Questions**: How to balance model complexity with real-time performance?
