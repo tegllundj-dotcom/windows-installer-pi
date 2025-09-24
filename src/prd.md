@@ -1,21 +1,44 @@
-# Real-Time Neural Network Analysis for Auto-Trading
+# Real-Time AI Trading Dashboard with Automated Execution
 
 ## Core Purpose & Success
-- **Mission Statement**: Create an advanced auto-trading platform with real-time neural network analysis, live market data integration, and intelligent pattern recognition for automated trading decisions.
-- **Success Indicators**: Real-time market predictions with high accuracy, profitable automated trading signals, and seamless integration between live data and AI analysis.
-- **Experience Qualities**: Real-time, intelligent, predictive
+- **Mission Statement**: Create an advanced auto-trading platform with real-time neural network analysis, live market data integration, and intelligent automated trading execution based on high-confidence AI signals with customizable risk parameters.
+- **Success Indicators**: Real-time market predictions with high accuracy, profitable automated trading signals, risk-managed automated execution, and seamless integration between live data and AI analysis.
+- **Experience Qualities**: Real-time, intelligent, automated, risk-aware
 
 ## Project Classification & Approach
-- **Complexity Level**: Complex Application (real-time ML functionality, live data streams, automated trading)
-- **Primary User Activity**: Monitoring live market analysis, reviewing AI predictions, and executing automated trades based on real-time neural network insights
+- **Complexity Level**: Complex Application (real-time ML functionality, live data streams, automated trading execution with risk management)
+- **Primary User Activity**: Monitoring live market analysis, configuring automated trading parameters, reviewing AI signals, and managing risk-controlled automated trading
 
 ## Thought Process for Feature Selection
-- **Core Problem Analysis**: Traders need real-time AI analysis of live market data to identify profitable opportunities as they emerge
-- **User Context**: Active traders and quantitative analysts who want to leverage real-time machine learning for immediate trading decisions
-- **Critical Path**: Live data stream → Real-time neural analysis → Pattern detection → Trading signals → Automated execution
-- **Key Moments**: Real-time prediction alerts, pattern detection notifications, automated trade execution confirmations
+- **Core Problem Analysis**: Traders need automated execution of high-confidence AI trading signals while maintaining strict risk control and customizable parameters
+- **User Context**: Active traders and quantitative analysts who want to leverage AI for automated trading with safety mechanisms and risk management
+- **Critical Path**: Live data stream → Real-time neural analysis → Pattern detection → High-confidence signals → Risk validation → Automated execution
+- **Key Moments**: High-confidence AI signal generation, risk parameter validation, automated trade execution, risk management alerts
 
 ## Essential Features
+
+### Automated Trading Engine
+- AI-powered signal generation with confidence scoring
+- Risk-managed automated execution with customizable parameters
+- Stop-loss and take-profit orders automatically created
+- Daily loss limits and position size controls
+- Trading hours restrictions and symbol filtering
+- Real-time execution monitoring and reporting
+
+### Risk Management System
+- Maximum position size controls (% of portfolio)
+- Confidence threshold requirements for signal execution
+- Stop-loss and take-profit percentage settings
+- Maximum daily loss limits
+- Maximum number of open positions
+- Allowed symbols whitelist for automated trading
+
+### AI Signal Intelligence
+- Multi-factor confidence scoring combining technical, sentiment, and momentum analysis
+- Signal strength classification (Weak/Moderate/Strong/Very Strong)
+- Detailed reasoning for each trading signal
+- Real-time signal generation with market condition adaptation
+- Historical signal performance tracking
 1. **Real-Time Market Data Integration**
    - Live price feeds and market data streaming
    - WebSocket connections for instant updates

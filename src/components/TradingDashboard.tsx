@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock, Target } from "@phosphor-icons/react"
+import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock, Target, Robot } from "@phosphor-icons/react"
 import { Portfolio, Trade, Position, Order } from "@/lib/mockData"
 import { formatCurrency, formatPercent } from "@/lib/utils"
 import { TradeDialog } from "@/components/TradeDialog"
@@ -19,8 +19,12 @@ import { NeuralNetworkPanel } from "@/components/NeuralNetworkPanel"
 import { NeuralNetworkAnalysis } from "@/components/NeuralNetworkAnalysis"
 import { PatternVisualization } from "@/components/PatternVisualization"
 import { ModelTrainingPanel } from "@/components/ModelTrainingPanel"
-import { useState } from "react"
+import { AutoTradingConfigPanel } from "@/components/AutoTradingConfigPanel"
+import { useState, useEffect, useRef } from "react"
 import { MarketPrediction, DetectedPattern } from "@/lib/neuralNetwork"
+import { AISignalService } from "@/lib/aiSignalService"
+import { AutoTradingConfig, AISignal } from "@/lib/automatedTrading"
+import { useKV } from '@github/spark/hooks'
 
 interface TradingDashboardProps {
   portfolio: Portfolio
@@ -45,6 +49,77 @@ export function TradingDashboard({
 }: TradingDashboardProps) {
   const [predictions, setPredictions] = useState<MarketPrediction[]>([])
   const [patterns, setPatterns] = useState<DetectedPattern[]>([])
+  const [autoTradingConfig, setAutoTradingConfig] = useKV<AutoTradingConfig>(
+    "auto-trading-config", 
+    null as any
+  )
+  const [recentSignals, setRecentSignals] = useState<AISignal[]>([])
+  const [dailyStats, setDailyStats] = useState({ tradesExecuted: 0, dailyPnL: 0 })
+  const aiSignalServiceRef = useRef<AISignalService | null>(null)
+
+  // Initialize AI Signal Service
+  useEffect(() => {
+    if (!autoTradingConfig) {
+      const tempService = new AISignalService({} as any)
+      const defaultConfig = tempService.getDefaultConfig()
+      setAutoTradingConfig(defaultConfig)
+      aiSignalServiceRef.current = tempService
+    } else {
+      if (!aiSignalServiceRef.current) {
+        aiSignalServiceRef.current = new AISignalService(autoTradingConfig)
+      } else {
+        aiSignalServiceRef.current.updateConfig(autoTradingConfig)
+      }
+    }
+  }, [autoTradingConfig, setAutoTradingConfig])
+
+  // Start/stop signal generation based on config
+  useEffect(() => {
+    const service = aiSignalServiceRef.current
+    if (!service) return
+
+    if (autoTradingConfig?.enabled) {
+      service.startSignalGeneration()
+      
+      // Subscribe to new signals
+      const unsubscribe = service.subscribeToSignals((signal) => {
+        setRecentSignals(prev => [signal, ...prev.slice(0, 9)]) // Keep last 10
+      })
+
+      return () => {
+        unsubscribe()
+        service.stopSignalGeneration()
+      }
+    } else {
+      service.stopSignalGeneration()
+    }
+  }, [autoTradingConfig?.enabled])
+
+  // Execute automated trading every 30 seconds when enabled
+  useEffect(() => {
+    if (!autoTradingConfig?.enabled || !aiSignalServiceRef.current) return
+
+    const interval = setInterval(async () => {
+      const service = aiSignalServiceRef.current
+      if (!service) return
+
+      await service.executeAutomatedTrading(
+        portfolio,
+        positions,
+        orders,
+        trades,
+        onUpdateOrders,
+        onUpdatePositions,
+        onUpdateTrades,
+        onUpdatePortfolio
+      )
+
+      // Update daily stats
+      setDailyStats(service.getDailyStats())
+    }, 30000) // Every 30 seconds
+
+    return () => clearInterval(interval)
+  }, [autoTradingConfig?.enabled, portfolio, positions, orders, trades, onUpdateOrders, onUpdatePositions, onUpdateTrades, onUpdatePortfolio])
 
   const totalPositionValue = positions.reduce((sum, pos) => sum + pos.marketValue, 0)
   const pendingOrders = orders.filter(o => o.status === 'PENDING')
@@ -150,6 +225,10 @@ export function TradingDashboard({
             <TabsTrigger value="positions">Positions</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="trades">Recent Trades</TabsTrigger>
+            <TabsTrigger value="auto-trading">
+              <Robot className="w-4 h-4 mr-1" />
+              Auto Trading
+            </TabsTrigger>
             <TabsTrigger value="strategies">Strategies</TabsTrigger>
             <TabsTrigger value="neural-networks">Neural Networks</TabsTrigger>
             <TabsTrigger value="risk">Risk Management</TabsTrigger>
@@ -256,6 +335,17 @@ export function TradingDashboard({
                 </Table>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="auto-trading" className="space-y-4">
+            {autoTradingConfig && (
+              <AutoTradingConfigPanel
+                config={autoTradingConfig}
+                onConfigChange={setAutoTradingConfig}
+                recentSignals={recentSignals}
+                dailyStats={dailyStats}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="strategies" className="space-y-4">
