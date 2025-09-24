@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock, Target, Robot } from "@phosphor-icons/react"
+import { TrendUp, TrendDown, Activity, CurrencyDollar, ChartBar, Plus, Clock, Target, Robot, TestTube } from "@phosphor-icons/react"
 import { Portfolio, Trade, Position, Order } from "@/lib/mockData"
 import { formatCurrency, formatPercent } from "@/lib/utils"
 import { TradeDialog } from "@/components/TradeDialog"
@@ -13,6 +13,8 @@ import { RiskManagement } from "@/components/RiskManagement"
 import { QuickActions } from "@/components/QuickActions"
 import { PortfolioChart } from "@/components/PortfolioChart"
 import { StrategyManager } from "@/components/StrategyManager"
+import { BacktestRunner } from "@/components/BacktestRunner"
+import { BacktestResults } from "@/components/BacktestResults"
 import { MLPredictions } from "@/components/MLPredictions"
 import { MLPerformance } from "@/components/MLPerformance"
 import { NeuralNetworkPanel } from "@/components/NeuralNetworkPanel"
@@ -25,6 +27,8 @@ import { useState, useEffect, useRef } from "react"
 import { MarketPrediction, DetectedPattern } from "@/lib/neuralNetwork"
 import { AISignalService } from "@/lib/aiSignalService"
 import { AutoTradingConfig, AISignal } from "@/lib/automatedTrading"
+import { StrategyConfig, BacktestResult } from "@/lib/tradingStrategy"
+import { DEFAULT_STRATEGIES } from "@/lib/strategyManager"
 import { useKV } from '@github/spark/hooks'
 
 interface TradingDashboardProps {
@@ -57,6 +61,11 @@ export function TradingDashboard({
   const [recentSignals, setRecentSignals] = useState<AISignal[]>([])
   const [dailyStats, setDailyStats] = useState({ tradesExecuted: 0, dailyPnL: 0 })
   const aiSignalServiceRef = useRef<AISignalService | null>(null)
+
+  // Backtesting state
+  const [strategies, setStrategies] = useKV<StrategyConfig[]>("trading-strategies", DEFAULT_STRATEGIES)
+  const [backtestResults, setBacktestResults] = useKV<Record<string, BacktestResult>>("backtest-results", {})
+  const [isBacktesting, setIsBacktesting] = useState<Record<string, boolean>>({})
 
   // Initialize AI Signal Service
   useEffect(() => {
@@ -133,6 +142,15 @@ export function TradingDashboard({
     onUpdateOrders(orders.map(order => 
       order.id === orderId ? { ...order, status: 'CANCELLED' as const } : order
     ))
+  }
+
+  const handleBacktestStart = (strategyId: string) => {
+    setIsBacktesting(prev => ({ ...prev, [strategyId]: true }))
+  }
+
+  const handleBacktestComplete = (strategyId: string, result: BacktestResult) => {
+    setIsBacktesting(prev => ({ ...prev, [strategyId]: false }))
+    setBacktestResults(prev => ({ ...prev, [strategyId]: result }))
   }
 
   return (
@@ -230,6 +248,10 @@ export function TradingDashboard({
             <TabsTrigger value="auto-trading">
               <Robot className="w-4 h-4 mr-1" />
               Auto Trading
+            </TabsTrigger>
+            <TabsTrigger value="backtesting">
+              <TestTube className="w-4 h-4 mr-1" />
+              Backtesting
             </TabsTrigger>
             <TabsTrigger value="strategies">Strategies</TabsTrigger>
             <TabsTrigger value="neural-networks">Neural Networks</TabsTrigger>
@@ -371,6 +393,37 @@ export function TradingDashboard({
                 dailyStats={dailyStats}
               />
             )}
+          </TabsContent>
+
+          <TabsContent value="backtesting" className="space-y-4">
+            <Tabs defaultValue="runner" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="runner">
+                  <TestTube className="w-4 h-4 mr-1" />
+                  Run Backtests
+                </TabsTrigger>
+                <TabsTrigger value="results">
+                  <ChartBar className="w-4 h-4 mr-1" />
+                  Results & Analysis
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="runner">
+                <BacktestRunner
+                  strategies={strategies || []}
+                  onBacktestStart={handleBacktestStart}
+                  onBacktestComplete={handleBacktestComplete}
+                  isBacktesting={isBacktesting}
+                />
+              </TabsContent>
+              
+              <TabsContent value="results">
+                <BacktestResults
+                  results={backtestResults || {}}
+                  strategies={strategies || []}
+                />
+              </TabsContent>
+            </Tabs>
           </TabsContent>
 
           <TabsContent value="strategies" className="space-y-4">

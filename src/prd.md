@@ -53,6 +53,17 @@
 - **Market Sentiment Tracking**: Overall market sentiment with technical and news sentiment breakdowns
 - **Volatility Monitoring**: Real-time volatility assessment and trend strength analysis
 - **Key Level Identification**: Dynamic support and resistance level detection
+
+### Advanced Backtesting Engine
+- **Dual-Mode Backtesting**: Traditional strategy backtesting and AI signal-based backtesting
+- **AI Signal Strategy Testing**: Simulate historical AI signal performance with confidence thresholds and risk parameters
+- **Traditional Strategy Testing**: Test moving averages, RSI mean reversion, Bollinger Bands, and custom strategies
+- **Comprehensive Performance Metrics**: Total return, win rate, Sharpe ratio, max drawdown, profit factor, and trade analysis
+- **AI-Specific Analytics**: Signal accuracy metrics, confidence score analysis, symbol performance breakdown, and AI insights
+- **Historical Signal Generation**: Realistic AI signal simulation based on historical market conditions and patterns
+- **Risk Parameter Optimization**: Test different risk levels, position sizes, and confidence thresholds
+- **Visual Performance Analysis**: Equity curves, drawdown charts, trade distribution analysis, and performance comparisons
+- **Strategy Comparison Tools**: Side-by-side backtesting results and performance benchmarking
 1. **Real-Time Market Data Integration**
    - Live price feeds and market data streaming
    - WebSocket connections for instant updates
