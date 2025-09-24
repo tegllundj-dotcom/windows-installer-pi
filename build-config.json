@@ -1,0 +1,30 @@
+{
+  "name": "trading-dashboard-build",
+  "version": "1.0.0",
+  "buildTarget": "production",
+  "outputDir": "dist",
+  "optimization": {
+    "minify": true,
+    "treeshake": true,
+    "compress": true,
+    "sourceMap": false
+  },
+  "assets": {
+    "include": [
+      "README.md",
+      "package.json",
+      "src/assets/**/*"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      "src/**/*.test.*",
+      ".git/**/*"
+    ]
+  },
+  "deployment": {
+    "stagingUrl": "https://staging.trading-dashboard.com",
+    "productionUrl": "https://trading-dashboard.com",
+    "healthCheck": "/api/health",
+    "timeout": 300
+  }
+}

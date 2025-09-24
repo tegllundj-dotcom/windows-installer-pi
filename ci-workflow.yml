@@ -1,0 +1,147 @@
+name: Build and Deploy Trading Dashboard
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  NODE_VERSION: '20'
+  ARTIFACT_NAME: 'trading-dashboard'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test Application
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run linting
+      run: npm run lint
+      
+    - name: Run type check
+      run: npx tsc --noEmit
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    name: Build Application
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Generate version info
+      run: node version-info.js write
+      
+    - name: Build application
+      run: npm run build
+      
+    - name: Create deployment package
+      run: |
+        mkdir -p deploy
+        cp -r dist/* deploy/
+        cp README.md deploy/
+        cp package.json deploy/
+        cp version.json deploy/
+        echo "Build completed at $(date)" > deploy/BUILD_INFO.txt
+        echo "Version: ${GITHUB_SHA:0:8}" >> deploy/BUILD_INFO.txt
+        echo "Branch: ${GITHUB_REF#refs/heads/}" >> deploy/BUILD_INFO.txt
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.ARTIFACT_NAME }}-${{ github.sha }}
+        path: deploy/
+        retention-days: 30
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Staging
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.ARTIFACT_NAME }}-${{ github.sha }}
+        path: ./deploy
+        
+    - name: Deploy to staging
+      run: |
+        echo "🚀 Deploying to staging environment"
+        echo "Deployment would happen here with your hosting provider"
+        echo "Files ready for deployment:"
+        ls -la deploy/
+        
+    - name: Notify deployment success
+      run: |
+        echo "✅ Staging deployment completed successfully"
+        echo "📦 Artifact: ${{ env.ARTIFACT_NAME }}-${{ github.sha }}"
+        echo "🌐 Staging URL would be displayed here"
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Create Release Package
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.ARTIFACT_NAME }}-${{ github.sha }}
+        path: ./release
+        
+    - name: Create release archive
+      run: |
+        cd release
+        zip -r ../${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.zip .
+        tar -czf ../${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.tar.gz .
+        
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.zip
+        asset_name: ${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.zip
+        asset_content_type: application/zip
+        
+    - name: Upload tar.gz release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.tar.gz
+        asset_name: ${{ env.ARTIFACT_NAME }}-${{ github.event.release.tag_name }}.tar.gz
+        asset_content_type: application/gzip
