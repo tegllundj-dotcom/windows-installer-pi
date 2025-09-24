@@ -1,42 +1,66 @@
-# Auto-Trading Dashboard with Strategy Management and Backtesting - PRD
+# Auto-Trading Dashboard with ML Strategy Optimization and Market Prediction - PRD
 
 ## Core Purpose & Success
 
-**Mission Statement**: A comprehensive auto-trading dashboard that empowers users to create, test, and deploy automated trading strategies while managing their portfolios with advanced order types, risk management tools, and professional-grade backtesting capabilities.
+**Mission Statement**: An advanced auto-trading dashboard that combines machine learning-powered market predictions with sophisticated strategy optimization, enabling users to create, test, and deploy AI-enhanced trading strategies with professional-grade risk management and performance analytics.
 
 **Success Indicators**: 
 - Users can successfully create and configure automated trading strategies
-- Backtesting provides accurate historical performance analysis
-- Strategy performance is clearly visualized with comprehensive metrics
+- ML predictions provide accurate market direction and price targets
+- Strategy optimization improves performance metrics through AI-driven parameter tuning
+- Market regime detection adapts strategies to current market conditions
 - Advanced orders (stop-loss, limit, stop-limit) execute reliably
-- Portfolio risk metrics are clearly visualized and actionable
-- Trading interface feels professional yet accessible
+- AI risk analysis provides actionable insights and early warning systems
+- Trading interface feels professional yet accessible with intelligent automation
 
-**Experience Qualities**: Intelligent, Professional, Analytical
+**Experience Qualities**: Intelligent, Predictive, Analytical
 
 ## Project Classification & Approach
 
-**Complexity Level**: Complex Application (advanced functionality, strategy automation, comprehensive state management)
+**Complexity Level**: Complex Application (AI/ML integration, advanced strategy automation, comprehensive state management)
 
-**Primary User Activity**: Creating, Acting, and Analyzing (strategy development, automated trading, performance analysis)
+**Primary User Activity**: Creating, Predicting, and Optimizing (AI-powered strategy development, market prediction, automated optimization)
 
 ## Core Problem Analysis
 
-Professional algorithmic traders and quantitative investors need sophisticated strategy development and testing tools that are typically only available in expensive trading platforms. This dashboard democratizes algorithmic trading by providing:
+Professional algorithmic traders need sophisticated ML-powered tools to gain competitive advantages in dynamic markets. Traditional trading platforms lack intelligent prediction and optimization capabilities. This dashboard provides:
 
-- Visual strategy configuration with pre-built templates
-- Comprehensive backtesting engine with realistic market simulation
-- Automated strategy execution with risk management
-- Professional-grade performance analytics and reporting
-- Advanced order management and portfolio risk analysis
+- AI-driven market prediction and trend analysis
+- Machine learning strategy optimization with genetic algorithms
+- Automated market regime detection and strategy adaptation  
+- Intelligent risk factor identification and monitoring
+- Professional-grade performance analytics with predictive insights
 
 ## Essential Features
 
+### Machine Learning Prediction Engine
+- **Price Predictions**: AI-powered price targets with confidence intervals across multiple timeframes
+- **Market Regime Detection**: Automatic identification of trending, ranging, volatile, or stable market conditions
+- **Pattern Recognition**: Advanced technical pattern detection using ML algorithms
+- **Sentiment Analysis Integration**: Market sentiment scoring and trend prediction
+- **Multi-timeframe Analysis**: Predictions spanning 1-hour to 1-week horizons
+
+### Strategy Optimization System  
+- **AI Parameter Tuning**: Genetic algorithm optimization of strategy parameters
+- **Performance Enhancement**: Automatic improvement of win rates, Sharpe ratios, and returns
+- **Risk-Adjusted Optimization**: Balance return maximization with risk minimization
+- **Real-time Strategy Adaptation**: Dynamic parameter adjustment based on market conditions
+- **Backtesting Integration**: Optimization validation through historical testing
+
 ### Automated Trading Strategy System
-- **Pre-built Strategies**: Moving Average Crossover, RSI Mean Reversion, Bollinger Bands
-- **Strategy Configuration**: Visual parameter tuning with sliders and real-time validation
-- **Risk Management Integration**: Per-strategy stop-loss, take-profit, position sizing, and drawdown limits
-- **Strategy Activation**: Toggle strategies on/off with real-time status monitoring
+### Automated Trading Strategy System
+- **ML-Enhanced Strategies**: Moving Average Crossover, RSI Mean Reversion, Pattern Recognition powered by machine learning
+- **AI Signal Generation**: Real-time trading signals with confidence scores and expected returns
+- **Dynamic Strategy Configuration**: AI-optimized parameter tuning with real-time performance feedback
+- **Intelligent Risk Management**: ML-powered position sizing, stop-loss optimization, and drawdown protection
+- **Adaptive Strategy Selection**: Automatic strategy activation based on market regime detection
+
+### AI Risk Management System
+- **Predictive Risk Analysis**: Early detection of portfolio concentration, volatility, and correlation risks  
+- **Market Stress Testing**: AI simulation of adverse market scenarios and portfolio impact
+- **Dynamic Position Sizing**: ML-optimized position sizes based on predicted volatility and correlations
+- **Real-time Risk Monitoring**: Continuous assessment of portfolio risk with intelligent alerting
+- **Risk Factor Identification**: Automatic detection and explanation of emerging risk factors
 
 ### Comprehensive Backtesting Engine
 - **Historical Simulation**: Test strategies against generated market data with configurable date ranges

@@ -13,6 +13,8 @@ import { RiskManagement } from "@/components/RiskManagement"
 import { QuickActions } from "@/components/QuickActions"
 import { PortfolioChart } from "@/components/PortfolioChart"
 import { StrategyManager } from "@/components/StrategyManager"
+import { MLPredictions } from "@/components/MLPredictions"
+import { MLPerformance } from "@/components/MLPerformance"
 
 interface TradingDashboardProps {
   portfolio: Portfolio
@@ -143,6 +145,8 @@ export function TradingDashboard({
             <TabsTrigger value="strategies">Strategies</TabsTrigger>
             <TabsTrigger value="risk">Risk Management</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="ml-predictions">AI Predictions</TabsTrigger>
+            <TabsTrigger value="ml-engine">ML Engine</TabsTrigger>
           </TabsList>
 
           <TabsContent value="positions" className="space-y-4">
@@ -292,6 +296,20 @@ export function TradingDashboard({
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="ml-predictions" className="space-y-4">
+            <MLPredictions 
+              trades={trades}
+              positions={positions}
+            />
+          </TabsContent>
+
+          <TabsContent value="ml-engine" className="space-y-4">
+            <MLPerformance 
+              trades={trades}
+              positions={positions}
+            />
           </TabsContent>
         </Tabs>
       </div>
