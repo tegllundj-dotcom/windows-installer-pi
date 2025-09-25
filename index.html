@@ -4,16 +4,40 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Real-Time AI Trading Dashboard</title>
+    <title>Simple To-Do List</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="/src/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="container">
+        <header>
+            <h1>Simple To-Do List</h1>
+            <p>Stay organized with your tasks</p>
+        </header>
+        
+        <div class="todo-form">
+            <input type="text" id="todo-input" placeholder="Add a new task..." />
+            <button id="add-btn">Add Task</button>
+        </div>
+        
+        <div class="todo-list-container">
+            <ul id="todo-list" class="todo-list"></ul>
+            
+            <div class="empty-state" id="empty-state">
+                <p>No tasks yet. Add one above to get started!</p>
+            </div>
+        </div>
+        
+        <div class="todo-stats">
+            <span id="total-tasks">0 tasks</span>
+            <span id="completed-tasks">0 completed</span>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 
 </html>
